@@ -1,11 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { Command, Config } from './types';
+import { Command } from './types';
 
-export const CONFIG: Readonly<Config> = Object.freeze({
+export const CONFIG = Object.freeze({
   BOT_TOKEN: process.env['BOT_TOKEN'] as string,
   APPLICATION_ID: process.env['APPLICATION_ID'] as string,
+  PREFIX: process.env['PREFIX'] as string,
 });
 
 export function validateEnvVars(): boolean {

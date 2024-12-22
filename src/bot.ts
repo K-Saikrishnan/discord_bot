@@ -1,6 +1,7 @@
 import { Client, GatewayIntentsString } from 'discord.js';
 
 import { InteractionEvent } from './events/interaction';
+import { MessageCreateEvent } from './events/message';
 import { ReadyEvent } from './events/ready';
 import { CONFIG, validateEnvVars } from './utils';
 
@@ -9,11 +10,12 @@ import { CONFIG, validateEnvVars } from './utils';
 
   console.log('Starting Bot...');
 
-  const INTENTS: GatewayIntentsString[] = ['Guilds', 'GuildMessages', 'GuildMessageReactions'];
+  const INTENTS: GatewayIntentsString[] = ['Guilds', 'GuildMessages', 'GuildMessageReactions', 'MessageContent'];
   const BOT = new Client({ intents: INTENTS });
 
   BOT.on('ready', async () => await ReadyEvent(BOT));
   BOT.on('interactionCreate', async (interaction) => await InteractionEvent(interaction));
+  BOT.on('messageCreate', async (msg) => await MessageCreateEvent(msg));
 
   await BOT.login(CONFIG.BOT_TOKEN);
 })();
