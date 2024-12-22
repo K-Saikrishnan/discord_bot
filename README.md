@@ -1,2 +1,3 @@
 # discord_bot
-Discord Bot using discord.jS
+
+Discord Bot using discord.js
