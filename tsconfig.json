@@ -17,6 +17,6 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "checkJs": true
   }
 }
