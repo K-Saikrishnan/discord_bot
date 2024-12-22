@@ -5,10 +5,12 @@ import process from 'process';
 const config = {
   entryPoints: ['./src/**'],
   outdir: 'dist',
-  minify: true,
   platform: 'node',
   target: 'node22',
   format: 'cjs',
+  drop: ['debugger'],
+  minify: true,
+  treeShaking: true,
 };
 
 if (process.argv.includes('--watch')) {
