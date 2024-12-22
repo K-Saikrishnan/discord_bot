@@ -1,17 +1,18 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, MessageFlags, bold } from 'discord.js';
+import { ChatInputCommandInteraction, InteractionReplyOptions, MessageFlags } from 'discord.js';
 import { Command } from '../../types';
 
 export const ping: Command = {
   data: new SlashCommandBuilder().setName('uptime').setDescription('Bot Uptime').setNSFW(false),
-  run: async (interaction: CommandInteraction) => {
+  run: async (interaction: ChatInputCommandInteraction) => {
     const humanReadableUptime = toHumanReadableTime(interaction.client.uptime);
+    const reply: InteractionReplyOptions = { content: `⏱️  ${humanReadableUptime}`, flags: MessageFlags.Ephemeral };
 
-    await interaction.reply({ content: `${bold('Uptime')}: ${humanReadableUptime}`, flags: MessageFlags.Ephemeral });
+    await interaction.reply(reply);
   },
 };
 
-const toHumanReadableTime = (uptime: number) => {
+function toHumanReadableTime(uptime: number) {
   const SECONDS_IN_DAY = 86400,
     SECONDS_IN_HOUR = 3600,
     SECONDS_IN_MINUTE = 60;
@@ -28,4 +29,4 @@ const toHumanReadableTime = (uptime: number) => {
   const seconds = Math.floor(totalSeconds % SECONDS_IN_MINUTE);
 
   return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-};
+}
