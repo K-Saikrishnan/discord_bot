@@ -1,6 +1,6 @@
-import { ChatInputCommandInteraction, EmbedBuilder, MessageFlags, SlashCommandBuilder } from 'discord.js';
-import { EMBED_COLOR } from '../constants';
-import { Command } from '../types';
+import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from 'discord.js';
+import { Command } from '../../utils/types';
+import { createEmbed } from '../../utils/utils';
 
 export const random: Command = {
   cmd: new SlashCommandBuilder()
@@ -12,7 +12,7 @@ export const random: Command = {
   run: async (interaction: ChatInputCommandInteraction) => {
     const [max, min] = [interaction.options.getInteger('max')!, interaction.options.getInteger('min')!];
 
-    const embed = new EmbedBuilder().setColor(EMBED_COLOR).setTitle(`🎲  ${getRandomNum(min, max)}`);
+    const embed = createEmbed().setTitle(`🎲  ${getRandomNum(min, max)}`);
 
     await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
   },

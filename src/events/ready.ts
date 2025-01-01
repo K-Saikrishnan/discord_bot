@@ -1,8 +1,8 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { Client } from 'discord.js';
-import { COMMANDS } from '../commands';
-import { CONFIG } from '../constants';
+import { COMMANDS } from '../commands/commands';
+import { CONFIG } from '../utils/constants';
 
 export const ReadyEvent = async (BOT: Client): Promise<void> => {
   try {

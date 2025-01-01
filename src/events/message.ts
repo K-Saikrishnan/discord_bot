@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { CONFIG } from '../constants';
+import { CONFIG } from '../utils/constants';
 
 export const MessageCreateEvent = async (msg: Message): Promise<void> => {
   if (msg.author.bot || !msg.content.includes(CONFIG.PREFIX)) return;

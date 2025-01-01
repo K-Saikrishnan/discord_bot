@@ -1,4 +1,5 @@
-import { CONFIG } from './constants';
+import { EmbedBuilder } from 'discord.js';
+import { CONFIG, EMBED_COLOR } from './constants';
 
 export function validateEnvVars(): boolean {
   const missingEnvVars = new Map<string, string>();
@@ -13,4 +14,8 @@ export function validateEnvVars(): boolean {
   }
 
   return true;
+}
+
+export function createEmbed() {
+  return new EmbedBuilder().setColor(EMBED_COLOR);
 }

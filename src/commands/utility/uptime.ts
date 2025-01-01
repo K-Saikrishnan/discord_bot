@@ -1,13 +1,13 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { ChatInputCommandInteraction, EmbedBuilder, MessageFlags } from 'discord.js';
-import { EMBED_COLOR } from '../constants';
-import { Command } from '../types';
+import { ChatInputCommandInteraction, MessageFlags } from 'discord.js';
+import { Command } from '../../utils/types';
+import { createEmbed } from '../../utils/utils';
 
 export const uptime: Command = {
   cmd: new SlashCommandBuilder().setName('uptime').setDescription('Bot Uptime').setNSFW(false),
   run: async (interaction: ChatInputCommandInteraction) => {
     const humanReadableUptime = toHumanReadableTime(interaction.client.uptime);
-    const embed = new EmbedBuilder().setColor(EMBED_COLOR).setTitle(`⏱️  ${humanReadableUptime}`);
+    const embed = createEmbed().setTitle(`⏱️  ${humanReadableUptime}`);
 
     await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
   },

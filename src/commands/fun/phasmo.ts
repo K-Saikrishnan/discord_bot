@@ -1,7 +1,7 @@
-import { EmbedBuilder, SlashCommandBuilder } from '@discordjs/builders';
+import { SlashCommandBuilder } from '@discordjs/builders';
 import { ChatInputCommandInteraction } from 'discord.js';
-import { EMBED_COLOR } from '../constants';
-import { Command } from '../types';
+import { Command } from '../../utils/types';
+import { createEmbed } from '../../utils/utils';
 
 export const phasmo: Command = {
   cmd: new SlashCommandBuilder()
@@ -22,8 +22,7 @@ export const phasmo: Command = {
   run: async (interaction: ChatInputCommandInteraction) => {
     const [lobby, journal] = [interaction.options.getInteger('lobby')!, interaction.options.getInteger('journal')!];
 
-    const embed = new EmbedBuilder()
-      .setColor(EMBED_COLOR)
+    const embed = createEmbed()
       .setTitle(`Let's play Phasmophobia!`)
       .setThumbnail('https://imgur.com/euDY2VF.png')
       .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })

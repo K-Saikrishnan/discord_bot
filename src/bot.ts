@@ -1,10 +1,10 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 
-import { CONFIG } from './constants';
 import { InteractionEvent } from './events/interaction';
 import { MessageCreateEvent } from './events/message';
 import { ReadyEvent } from './events/ready';
-import { validateEnvVars } from './utils';
+import { CONFIG } from './utils/constants';
+import { validateEnvVars } from './utils/utils';
 
 (async () => {
   if (!validateEnvVars()) process.exit(1);
