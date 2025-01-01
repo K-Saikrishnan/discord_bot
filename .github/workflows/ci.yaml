@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: 🎨 Formatting & Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⏬ Checkout
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🎨 Check Format
+        run: npm run format:check
+
+      - name: 🎨 Check Lint
+        run: npm run lint:check
+
+  build-check:
+    name: 👷 Build Check
+    needs: [lint]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⏬ Checkout
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 👷 Build
+        run: npm run build

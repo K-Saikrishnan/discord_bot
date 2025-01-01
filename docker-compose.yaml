@@ -1,0 +1,8 @@
+services:
+  discord_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: saikrishnank/discord_bot
+    container_name: discord_bot_container
+    env_file: .env
